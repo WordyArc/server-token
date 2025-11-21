@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+authproxy:
+  oidc:
+    issuer-uri: "http://localhost:7766/realms/example-realm"
+
+logging:
+  level:
+    org.springframework.security: DEBUG

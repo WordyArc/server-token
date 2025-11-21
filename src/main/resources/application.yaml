@@ -26,9 +26,9 @@ authproxy:
       - "https://my-frontend.example.com"
   oidc:
     # либо issuerUri
-    issuer-uri: "https://keycloak.example.com/realms/my-realm"
+    issuer-uri: "http://localhost:7766/realms/example-realm"
     # либо вместо него jwk-set-uri:
-    # jwk-set-uri: "https://keycloak.example.com/realms/my-realm/protocol/openid-connect/certs"
+    # jwk-set-uri: "https://keycloak.example.com/realms/example-realm/protocol/openid-connect/certs"
 
 logging:
   level:
