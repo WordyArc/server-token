@@ -1,0 +1,5 @@
+              ▗   ▌
+▛▘█▌▛▘▌▌█▌▛▘▄▖▜▘▛▌▙▘█▌▛▌
+▄▌▙▖▌ ▚▘▙▖▌   ▐▖▙▌▛▖▙▖▌▌
+
+${AnsiColor.GREEN}:: Built with Spring Boot ::${AnsiColor.DEFAULT} ${spring-boot.version}
