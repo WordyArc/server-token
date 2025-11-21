@@ -1,3 +1,36 @@
+server:
+  port: 8085
+
+management:
+  server:
+    port: 8086
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+
 spring:
   application:
     name: server-token
+
+authproxy:
+  userinfo-path: /userinfo
+  cors:
+    allowed-origins:
+      - "http://localhost:3000"
+      - "https://my-frontend.example.com"
+  oidc:
+    # либо issuerUri
+    issuer-uri: "https://keycloak.example.com/realms/my-realm"
+    # либо вместо него jwk-set-uri:
+    # jwk-set-uri: "https://keycloak.example.com/realms/my-realm/protocol/openid-connect/certs"
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO
