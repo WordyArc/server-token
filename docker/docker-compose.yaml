@@ -1,0 +1,77 @@
+name: server-token
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: st-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d keycloak || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - st-net
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.5
+    container_name: st-keycloak
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db:5432/keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - ./keycloak/realms:/opt/keycloak/data/import
+    ports:
+      - "7766:8080"
+    networks:
+      - st-net
+
+  server-token:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: server-token
+    restart: unless-stopped
+    env_file:
+      - ./server-token/JAVA_OPTS
+    depends_on:
+      keycloak:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_CONFIG_ADDITIONAL_LOCATION: file:/config/
+    volumes:
+      - ./server-token/config:/config
+    ports:
+      - "8085:8085" # app
+      - "8086:8086" # actuator
+    networks:
+      - st-net
+
+volumes:
+  db-data:
+
+networks:
+  st-net:

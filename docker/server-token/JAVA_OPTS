@@ -1,0 +1,1 @@
+JAVA_OPTS=" -Dnode.id=server-token"

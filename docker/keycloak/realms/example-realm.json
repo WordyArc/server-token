@@ -1,0 +1,92 @@
+{
+  "id": "example-realm",
+  "realm": "example-realm",
+  "displayName": "Example Realm",
+  "enabled": true,
+  "sslRequired": "NONE",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+
+  "roles": {
+    "realm": [
+      {
+        "name": "app_admin",
+        "description": "Example realm administrator"
+      },
+      {
+        "name": "app_user",
+        "description": "Example realm user"
+      }
+    ],
+    "client": {
+      "server-token": [
+        {
+          "name": "api_admin",
+          "description": "Server Token API admin"
+        },
+        {
+          "name": "api_user",
+          "description": "Server Token API user"
+        }
+      ]
+    }
+  },
+
+  "groups": [
+    {
+      "name": "admins",
+      "path": "/admins",
+      "realmRoles": [ "app_admin" ]
+    },
+    {
+      "name": "users",
+      "path": "/users",
+      "realmRoles": [ "app_user" ]
+    }
+  ],
+
+  "clients": [
+    {
+      "clientId": "server-token",
+      "name": "Server Token API",
+      "description": "Backend resource server example",
+      "protocol": "openid-connect",
+
+      "bearerOnly": true,
+      "publicClient": false,
+
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "authorizationServicesEnabled": false,
+
+      "attributes": {
+        "access.token.lifespan": "300"
+      }
+    },
+    {
+      "clientId": "example-frontend",
+      "name": "Example Frontend",
+      "description": "SPA / frontend example",
+      "protocol": "openid-connect",
+
+      "publicClient": true,
+      "bearerOnly": false,
+
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+
+      "redirectUris": [
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000"
+      ]
+    }
+  ]
+}

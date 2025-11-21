@@ -1,0 +1,33 @@
+server:
+  port: 8085
+
+management:
+  server:
+    port: 8086
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+
+spring:
+  application:
+    name: server-token
+
+authproxy:
+  userinfo-path: /userinfo
+  cors:
+    allowed-origins:
+      - "http://localhost:3000"
+      - "https://my-frontend.example.com"
+  oidc:
+    jwk-set-uri: "http://host.docker.internal:7766/realms/example-realm/protocol/openid-connect/certs"
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: INFO
