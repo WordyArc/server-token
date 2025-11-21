@@ -39,7 +39,12 @@ class SecurityConfig(private val properties: AuthProxyProperties) {
     ): SecurityFilterChain {
         http {
             securityMatcher(properties.userinfoPath)
-            cors { configurationSource = corsConfigurationSource }
+
+            cors {
+                if (properties.cors.isDisabled()) disable()
+                else configurationSource = corsConfigurationSource
+            }
+
             authorizeHttpRequests {
                 authorize(HttpMethod.OPTIONS, properties.userinfoPath, permitAll)
                 authorize(anyRequest, authenticated)

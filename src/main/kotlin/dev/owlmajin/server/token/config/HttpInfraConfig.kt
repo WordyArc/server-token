@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import kotlin.collections.ifEmpty
 
 @Configuration
 class HttpInfraConfig(private val properties: AuthProxyProperties) {
@@ -26,7 +25,7 @@ class HttpInfraConfig(private val properties: AuthProxyProperties) {
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration().apply {
             allowCredentials = true
-            allowedOrigins = properties.cors.allowedOrigins.ifEmpty { listOf("*") }
+            allowedOrigins = properties.cors.allowedOrigins
             allowedMethods = listOf("GET", "OPTIONS")
             allowedHeaders = listOf("Authorization", "Content-Type")
             maxAge = 3600
