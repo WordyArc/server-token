@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("authproxy")
 class AuthProxyProperties(
-    val userInfoPath: String = "/userinfo",
+    val userinfoPath: String = "/userinfo",
     val cors: Cors = Cors(),
     val oidc: Oidc = Oidc(),
 ) {
