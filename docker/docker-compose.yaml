@@ -37,6 +37,33 @@ services:
     networks:
       - st-net
 
+  init-keycloak:
+    image: alpine:3.22.2
+    container_name: st-keycloak-init
+    user: "0:0"
+    depends_on:
+      keycloak:
+        condition: service_started
+    environment:
+      KC_URL: http://keycloak:8080
+      # see bootstrap-admin-* in keycloak.conf
+      BOOTSTRAP_ADMIN_USERNAME: admin
+      BOOTSTRAP_ADMIN_PASSWORD: admin
+      # created permanent admin
+      PERM_ADMIN_USERNAME: kcadmin
+      PERM_ADMIN_PASSWORD: kcadmin
+      DELETE_BOOTSTRAP_ADMIN: "true"
+    volumes:
+      - ./keycloak/init-keycloak.sh:/init-keycloak.sh:ro
+    entrypoint: ["/bin/sh","/init-keycloak.sh"]
+#    entrypoint: ["/bin/sh","-c"]
+#    command: >
+#      apk add --no-cache jq >/dev/null 2>&1 &&
+#      sh /init-keycloak.sh
+    restart: "no"
+    networks:
+      - st-net
+
   server-token:
     build:
       context: ..
@@ -48,6 +75,8 @@ services:
     depends_on:
       keycloak:
         condition: service_started
+      init-keycloak:
+        condition: service_completed_successfully
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_CONFIG_ADDITIONAL_LOCATION: file:/config/
