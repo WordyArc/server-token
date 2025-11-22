@@ -26,23 +26,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://db:5432/keycloak
-      KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: postgres
-
-      KC_HEALTH_ENABLED: "true"
-      KC_METRICS_ENABLED: "true"
-
     command:
       - start-dev
       - --import-realm
     volumes:
-      - ./keycloak/realms:/opt/keycloak/data/import
+      - ./keycloak/keycloak.conf:/opt/keycloak/conf/keycloak.conf:ro
+      - ./keycloak/realms:/opt/keycloak/data/import:ro
     ports:
       - "7766:8080"
     networks:
