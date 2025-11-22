@@ -25,7 +25,7 @@ authproxy:
       - "http://localhost:3000"
       - "https://my-frontend.example.com"
   oidc:
-    jwk-set-uri: "http://host.docker.internal:7766/realms/example-realm/protocol/openid-connect/certs"
+    jwk-set-uri: "http://host.docker.internal:7766/realms/example/protocol/openid-connect/certs"
 
 logging:
   level:
