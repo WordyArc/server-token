@@ -1,6 +1,6 @@
 {
-  "id": "example-realm",
-  "realm": "example-realm",
+  "id": "example",
+  "realm": "example",
   "displayName": "Example Realm",
   "enabled": true,
   "sslRequired": "NONE",

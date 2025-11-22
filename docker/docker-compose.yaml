@@ -2,7 +2,7 @@ name: server-token
 
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     container_name: st-db
     restart: unless-stopped
     environment:
@@ -20,7 +20,7 @@ services:
       - st-net
 
   keycloak:
-    image: quay.io/keycloak/keycloak:24.0.5
+    image: keycloak/keycloak:26.4.5
     container_name: st-keycloak
     restart: unless-stopped
     depends_on:
