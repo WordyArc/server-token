@@ -1,8 +1,12 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
-	kotlin("jvm") version "2.3.0-RC"
+	kotlin("jvm") version "2.3.0-RC2"
 	kotlin("plugin.spring") version "2.2.21"
 	id("org.springframework.boot") version "4.0.0"
 	id("io.spring.dependency-management") version "1.1.7"
+
+    kotlin("plugin.power-assert") version "2.2.21"
 }
 
 group = "dev.owlmajin"
@@ -30,7 +34,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit6")
+//	testImplementation("org.jetbrains.kotlin:kotlin-test-junit6")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
@@ -40,6 +44,9 @@ kotlin {
 		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
 	}
 }
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+powerAssert {}
 
 tasks.withType<Test> {
 	useJUnitPlatform()
