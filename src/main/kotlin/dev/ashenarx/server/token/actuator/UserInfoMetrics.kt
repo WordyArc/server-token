@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token.actuator
+package dev.ashenarx.server.token.actuator
 
 import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.stereotype.Component

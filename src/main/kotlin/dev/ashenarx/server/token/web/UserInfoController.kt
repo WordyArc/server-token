@@ -1,7 +1,7 @@
-package dev.owlmajin.server.token.web
+package dev.ashenarx.server.token.web
 
-import dev.owlmajin.server.token.actuator.UserInfoMetrics
-import dev.owlmajin.server.token.security.AuthoritiesMapper
+import dev.ashenarx.server.token.actuator.UserInfoMetrics
+import dev.ashenarx.server.token.security.AuthoritiesMapper
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken

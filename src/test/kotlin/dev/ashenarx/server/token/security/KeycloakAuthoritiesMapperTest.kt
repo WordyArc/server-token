@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token.security
+package dev.ashenarx.server.token.security
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

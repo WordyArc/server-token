@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token
+package dev.ashenarx.server.token
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
@@ -9,5 +9,5 @@ import org.springframework.boot.runApplication
 class ServerTokenApplication
 
 fun main(args: Array<String>) {
-	runApplication<ServerTokenApplication>(*args)
+	runApplication<dev.ashenarx.server.token.ServerTokenApplication>(*args)
 }

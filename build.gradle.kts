@@ -1,15 +1,15 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
-	kotlin("jvm") version "2.3.0-RC2"
-	kotlin("plugin.spring") version "2.2.21"
+	kotlin("jvm") version "2.3.21"
+	kotlin("plugin.spring") version "2.3.21"
 	id("org.springframework.boot") version "4.0.0"
 	id("io.spring.dependency-management") version "1.1.7"
 
     kotlin("plugin.power-assert") version "2.2.21"
 }
 
-group = "dev.owlmajin"
+group = "dev.ashenarx"
 version = "0.0.1-SNAPSHOT"
 description = "Demo project for Spring Boot"
 
@@ -18,6 +18,13 @@ java {
 		languageVersion = JavaLanguageVersion.of(25)
 	}
 }
+
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll("-Xjsr305=strict")
+	}
+}
+
 
 repositories {
 	mavenCentral()
@@ -39,11 +46,6 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
-	}
-}
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 powerAssert {}

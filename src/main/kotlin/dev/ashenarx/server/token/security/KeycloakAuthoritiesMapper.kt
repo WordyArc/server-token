@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token.security
+package dev.ashenarx.server.token.security
 
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Component

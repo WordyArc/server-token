@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token.config
+package dev.ashenarx.server.token.config
 
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue

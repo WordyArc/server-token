@@ -1,4 +1,4 @@
-package dev.owlmajin.server.token.config
+package dev.ashenarx.server.token.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
